@@ -1,4 +1,6 @@
 const express = require("express");
+const res = require("express/lib/response");
+const { restart } = require("nodemon");
 const bd = require("./dbconnection");
 const port = process.env.PORT || 3000;
 
@@ -17,7 +19,51 @@ api.get("/produtos", async (req, res) => {
     }
 })
 
+api.get("/produtos/:codigo", async (req, res) => {
+    try {
+        const idProduto = req.params.codigo;
+        console.log(idProduto);
+        console.log("ID recuperado = " + req.params["codigo"]);
+        const resultado = await bd.getProdutoPorId(idProduto);
+        if (resultado.length == 0) {
+            res.status(404);
+            res.send("NOT FOUND")
+        }
+        else {
+            const produto = resultado[0];
+            res.status(200);
+            res.json(produto);
+        }
+    } catch (erro) {
+        console.log("Erro no endpoint /GET/id");
+        console.log(erro);
+    }
+})
 
+api.get("/categorias", async (req, res) => {
+    try {
+        const categorias = await bd.getCategorias();
+        res.status(200);
+        res.json(categorias);
+    } catch (erro) {
+        console.log("Erro no endpoint /GET/categorias");
+        console.log(erro);
+
+    }
+})
+
+api.get("/categoria/:id", async (req, res) => {
+    try {
+        const idCategoria = req.params["id"];
+        const prodporcateg = await bd.getProdutosPorCategoria(idCategoria);
+        res.status(200);
+        res.json(prodporcateg);
+
+    } catch (erro) {
+        console.log("Erro no endpoint GET/categoria/id");
+        console.log(erro);
+    }
+})
 
 
 
