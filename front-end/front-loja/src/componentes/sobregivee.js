@@ -24,6 +24,7 @@ class Sgivee extends React.Component {
                         </div>
                     </div>
                 </div>
+                <div className=""></div>
                 <div className="container">
                     <div className="col-givee">
                         <h1 id="title-why">Por que a givee?</h1>
