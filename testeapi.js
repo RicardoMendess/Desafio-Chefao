@@ -3,7 +3,7 @@
 // passo 3 - usar o express para definir meus pontos de atendimento de url (endpoints)
 
 const express = require("express");
-const porta = process.env.PORT || 3000;
+const porta = process.env.PORT || 3500;
 const api = express();
 
 api.get("/produtos", (req, res) => {

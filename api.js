@@ -2,7 +2,7 @@ const express = require("express");
 const res = require("express/lib/response");
 const { restart } = require("nodemon");
 const bd = require("./dbconnection");
-const port = process.env.PORT || 3000;
+const port = process.env.PORT || 3500;
 
 const api = express(); // aqui nossa máquina vira um site (application server)
 
